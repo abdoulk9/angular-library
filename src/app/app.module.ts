@@ -18,9 +18,11 @@ import { AuthGuardService } from './services/auth-guard.service';
 const appRoutes: Routes = [
 { path: 'auth/signup', component: SignupComponent },
 { path: 'auth/signin', component: SigninComponent },
-{ path: 'books', component: BookListComponent },
-{ path: 'books/news', component: BookFormComponent },
-{ path: 'books/views/:id', component: SingleComponent }
+{ path: 'books', canActivate:[AuthGuardService], component: BookListComponent },
+{ path: 'books/news', canActivate:[AuthGuardService], component: BookFormComponent },
+{ path: 'books/views/:id', canActivate:[AuthGuardService], component: SingleComponent },
+{ path: '', redirectTo: 'books', pathMatch: 'full' },
+{ path: '**', redirectTo: 'books'}
 ] 
 
 @NgModule({
