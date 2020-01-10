@@ -24,6 +24,7 @@ bookSubscription: Subscription;//souscription au subject du service
         this.books = books;
       }
     );
+    this.booksService.getBooks();
     this.booksService.emitBooks();
   }
   //Création d'un nouveau  livre
@@ -36,7 +37,7 @@ bookSubscription: Subscription;//souscription au subject du service
   }
   //Visualisation d'un livre
   onViewBook(id: number){
-    this.router.navigate(['/books','view', id]);
+    this.router.navigate(['/books','views', id]);
   }
 
   //Desinscription au subject à la destruction du component

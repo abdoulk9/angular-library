@@ -8,7 +8,7 @@ import DataSnapshot = firebase.database.DataSnapshot;
   providedIn: 'root'
 })
 export class BooksService {
-  books: Book[];
+  books: Book[]=[];
   booksSubject = new Subject<Book[]>();
 
   constructor() {
