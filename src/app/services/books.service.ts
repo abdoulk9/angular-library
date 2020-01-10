@@ -47,7 +47,7 @@ export class BooksService {
 createNewBook(newBook: Book){
   this.books.push(newBook);
   this.saveBook();//Enregistre le nouveau livre dans l'array
-  this.emitBooks();//Enregistre le nouveau array
+  this.emitBooks();//Emetre le subject
 }
 //Suppression d'un livre
 removeBook(book: Book){
