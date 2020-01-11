@@ -12,6 +12,9 @@ import { Book } from 'src/models/book.models';
 export class BookFormComponent implements OnInit {
  
    bookForm: FormGroup;
+   fileUploading = false;
+   fileUrl: string;
+   fileUploaded = false;
 
   constructor(private formBuilder: FormBuilder,
               private booksService: BooksService,
@@ -32,9 +35,26 @@ export class BookFormComponent implements OnInit {
     const title = this.bookForm.get('title').value;
     const author = this.bookForm.get('author').value;
     const newBook = new Book(title, author);
-    console.log(newBook);
+    //Si l'url existe et pas vide on l'affecte à photo 
+    if(this.fileUrl && this.fileUrl !== ''){
+      newBook.photo = this.fileUrl;
+    }
     this.booksService.createNewBook(newBook);
     this.router.navigate(['/books']);
   }
 
+  onUploadFile(file: File){
+    this.fileUploading = true;
+    this.booksService.uploadFile(file).then(
+      (url: string) => {
+        this.fileUrl = url;
+        this.fileUploading = false;
+        this.fileUploaded = true;
+      }
+    );
+  }
+
+  detectFiles(event){
+    this.onUploadFile(event.target.files[0]);
+  }
 }
